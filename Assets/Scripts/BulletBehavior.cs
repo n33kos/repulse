@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletBehavior : MonoBehaviour {
 
 	public float speed = 25;
+    public float power = 2;
 
 	void Start () {
 		Destroy(gameObject, 20);
@@ -15,7 +16,7 @@ public class BulletBehavior : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-		//Destroy(gameObject);
+		Destroy(gameObject);
 	}
 
 }

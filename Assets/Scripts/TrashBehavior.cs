@@ -21,4 +21,21 @@ public class TrashBehavior : MonoBehaviour {
     public void setPosition( float xPos, float yPos) {
         transform.position = new Vector3(xPos, yPos, 0);
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        float bulletPower = col.transform.GetComponent<BulletBehavior>().power/3;
+        float bulletPosition = col.transform.position.y;
+        float positionY;
+
+        if (bulletPosition > transform.position.y)
+        {
+            positionY = transform.position.y - bulletPower;
+        } else
+        {
+            positionY = transform.position.y + bulletPower;
+        }
+
+        setPosition(transform.position.x, positionY);
+    }
 }
