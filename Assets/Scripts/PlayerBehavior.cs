@@ -6,6 +6,7 @@ public class PlayerBehavior : MonoBehaviour {
 
 	public Rigidbody2D rigidBody;
 	public bool canMove = true;
+	public bool isAI = false;
 	public GameObject bullet;
 
 	void Start () {		
