@@ -53,9 +53,9 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 0.25
-  m_LinearDrag: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.1
+  m_LinearDrag: 0.05
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -90,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 0}
   canMove: 1
+  isAI: 0
   bullet: {fileID: 1635236591646110, guid: c77868d4db38e4346a8404a512560be5, type: 2}
 --- !u!212 &212039987999034784
 SpriteRenderer:

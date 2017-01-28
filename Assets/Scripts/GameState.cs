@@ -20,7 +20,6 @@ public class GameState : MonoBehaviour {
 	}
 
 	void LateUpdate () {
-		Debug.Log( DetermineObjectiveAverage() );
 	}
 
 	public void ExitGame () {
