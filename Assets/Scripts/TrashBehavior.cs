@@ -5,48 +5,39 @@ using UnityEngine;
 public class TrashBehavior : MonoBehaviour {
     public GUIHandler guiHandler;
 
-    public float xPos;
-    float yPos = 0f;
-
+    public float targetPosY = 0;
 
     // Use this for initialization
     void Start () {
-        setPosition(transform.position.x, yPos);
-
         guiHandler = GameObject.Find("GameState").GetComponent<GUIHandler>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	void FixedUpdate () {
+	   transform.position = new Vector3(transform.position.x, transform.position.y + targetPosY/1.25f*Time.fixedDeltaTime, 0);
 	}
 
-    public void setPosition( float xPos, float yPos) {
-        transform.position = new Vector3(xPos, yPos, 0);
-    }
-
     void OnTriggerEnter2D(Collider2D col)
-    {
-        float bulletPower = col.transform.GetComponent<BulletBehavior>().power/5;
+    {   
+        BulletBehavior bb = col.transform.GetComponent<BulletBehavior>();
+        if (!bb)
+            return;
+            
+        float bulletPower = bb.power/10;
         float bulletPosition = col.transform.position.y;
-        float positionY;
 
         if (bulletPosition > transform.position.y)
         {
-            positionY = transform.position.y - bulletPower;
-        } else
-        {
-            positionY = transform.position.y + bulletPower;
+            targetPosY = targetPosY - bulletPower;
+        } else {
+            targetPosY = targetPosY + bulletPower;
         }
 
-        setPosition(transform.position.x, positionY);
-
         // You WIN!!!!
-        if (positionY > 4f)
+        if (targetPosY > 4f)
         {
             Debug.Log("Win");
             guiHandler.SetGuiMode(2);
-        } else if (positionY < -4f)
+        } else if (targetPosY < -4f)
         {
             Debug.Log("Fail");
             guiHandler.SetGuiMode(2);
