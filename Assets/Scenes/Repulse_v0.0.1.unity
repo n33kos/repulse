@@ -1393,6 +1393,18 @@ Prefab:
       value: 
       objectReference: {fileID: 1031221715355818, guid: 9041b0e4d2b8b90408624eafe7e56cab,
         type: 2}
+    - target: {fileID: 114910008375738608, guid: 5303d2ad939594d488d8859a4e11fbdf,
+        type: 2}
+      propertyPath: trashPrefab
+      value: 
+      objectReference: {fileID: 1879050445607512, guid: 1c409fe3228dbd541ba0a7db70c96b82,
+        type: 2}
+    - target: {fileID: 114910008375738608, guid: 5303d2ad939594d488d8859a4e11fbdf,
+        type: 2}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 1031221715355818, guid: 9041b0e4d2b8b90408624eafe7e56cab,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5303d2ad939594d488d8859a4e11fbdf, type: 2}
   m_IsPrefabParent: 0
@@ -2044,6 +2056,17 @@ MonoBehaviour:
       - m_Target: {fileID: 1551130217}
         m_MethodName: SetGuiMode
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 1551130218}
+        m_MethodName: DestroyAllGameObjects
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

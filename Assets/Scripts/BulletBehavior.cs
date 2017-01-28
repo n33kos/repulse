@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour {
 
-	public float speed = 25;
+	public float speed = 15;
     public float power = 2;
 
 	void Start () {
-		Destroy(gameObject, 20);
+		Destroy(gameObject, 5);
 	}
 	
 	void FixedUpdate () {
