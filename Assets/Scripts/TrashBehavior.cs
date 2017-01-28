@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrashBehavior : MonoBehaviour {
+    public GUIHandler guiHandler;
 
     public float xPos;
     float yPos = 0f;
@@ -11,6 +12,8 @@ public class TrashBehavior : MonoBehaviour {
     // Use this for initialization
     void Start () {
         setPosition(transform.position.x, yPos);
+
+        guiHandler = GameObject.Find("GameState").GetComponent<GUIHandler>();
 	}
 	
 	// Update is called once per frame
@@ -37,5 +40,16 @@ public class TrashBehavior : MonoBehaviour {
         }
 
         setPosition(transform.position.x, positionY);
+
+        // You WIN!!!!
+        if (positionY > 4f)
+        {
+            Debug.Log("Win");
+            guiHandler.SetGuiMode(2);
+        } else if (positionY < -4f)
+        {
+            Debug.Log("Fail");
+            guiHandler.SetGuiMode(2);
+        }
     }
 }
