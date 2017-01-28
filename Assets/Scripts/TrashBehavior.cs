@@ -24,7 +24,7 @@ public class TrashBehavior : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        float bulletPower = col.transform.GetComponent<BulletBehavior>().power/3;
+        float bulletPower = col.transform.GetComponent<BulletBehavior>().power/5;
         float bulletPosition = col.transform.position.y;
         float positionY;
 
