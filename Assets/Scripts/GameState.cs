@@ -9,9 +9,9 @@ public class GameState : MonoBehaviour {
     public GameObject trashPrefab;
     public GameObject playerPrefab;
     //This is the list of Transform objects for the objectives
-    private List<Transform> objectives = new List<Transform>();
+    public List<Transform> objectives = new List<Transform>();
     //This is the list of Transform objects for the players
-    private List<Transform> players = new List<Transform>();
+    public List<Transform> players = new List<Transform>();
 
     // Score variables
     public int playerScore = 0;
@@ -80,23 +80,38 @@ public class GameState : MonoBehaviour {
     	return average /= objectives.Count;
     }
 
-    public void DestroyAllGameObjects() {
+    public void UnlistObjective(GameObject condemned) {
         //iterate through objective gameobjects
-		for (int i = objectives.Count-1; i>=0; i--) {
-            if (objectives[i].gameObject != null)
+        for (int i = objectives.Count-1; i>=0; i--) {
+            if (objectives[i].gameObject.GetInstanceID() == condemned.GetInstanceID())
             {
                 //destroy objective gameobject
-                Destroy(objectives[i].gameObject);
+                objectives.RemoveAt(i);
             }
-		}
+        }        
+    }
+
+    public void DestroyAllGameObjects() {
+        //iterate through objective gameobjects
+        if (objectives.Count > 0) {
+    		for (int i = objectives.Count-1; i>=0; i--) {
+                if (objectives[i].gameObject != null)
+                {
+                    //destroy objective gameobject
+                    Destroy(objectives[i].gameObject);
+                }
+    		}
+        }
         //iterate through player gameobjects
-		for (int i = players.Count-1; i>=0; i--) {
-            if (players[i].gameObject != null)
-            {
-                //destroy player gameobject
-                Destroy(players[i].gameObject);
-            }
-		}
+        if ( players.Count > 0) {
+    		for (int i = players.Count-1; i>=0; i--) {
+                if (players[i].gameObject != null)
+                {
+                    //destroy player gameobject
+                    Destroy(players[i].gameObject);
+                }
+    		}
+        }
         //empty both lists so we dont reference deleted objects.
 		objectives.Clear();
 		players.Clear();

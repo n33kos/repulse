@@ -27,12 +27,14 @@ public class TrashBehavior : MonoBehaviour {
             if (transform.position.y > 4f)
             {
                 // Add a point to the player's score
+                gameState.UnlistObjective(gameObject);
                 gameState.setScore(true);
                 Destroy(gameObject);
             }
             else if (transform.position.y < -4f)
             {
                 // Add a point to the enemies score
+                gameState.UnlistObjective(gameObject);
                 gameState.setScore(false);
                 Destroy(gameObject);
             }
