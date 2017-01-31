@@ -3,24 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameState : MonoBehaviour {
+    public GUIHandler guiHandler;
 
     //Public prefabs to be set in the editor
     public GameObject trashPrefab;
     public GameObject playerPrefab;
-
-	//This is the list of Transform objects for the objectives
-	private List<Transform> objectives = new List<Transform>();
+    //This is the list of Transform objects for the objectives
+    private List<Transform> objectives = new List<Transform>();
     //This is the list of Transform objects for the players
     private List<Transform> players = new List<Transform>();
+
+    // Score variables
+    public int playerScore = 0;
+    public int enemyScore = 0;
+
+    // Set if is playing or not
+    public bool isPlaying = true;
 
 	void Start () {
         //SpawnTrash();
         //SpawnPlayer();
         //SpawnEnemyAI();
-	}
-	
-	void Update () {
-		
+        guiHandler = GetComponent<GUIHandler>();
+    }
+
+    void Update () {		
 	}
 
 	void LateUpdate () {
@@ -76,16 +83,72 @@ public class GameState : MonoBehaviour {
     public void DestroyAllGameObjects() {
         //iterate through objective gameobjects
 		for (int i = objectives.Count-1; i>=0; i--) {
-            //destroy objective gameobject
-			Destroy( objectives[i].gameObject );
+            if (objectives[i].gameObject != null)
+            {
+                //destroy objective gameobject
+                Destroy(objectives[i].gameObject);
+            }
 		}
         //iterate through player gameobjects
 		for (int i = players.Count-1; i>=0; i--) {
-            //destroy player gameobject
-			Destroy( players[i].gameObject );
+            if (players[i].gameObject != null)
+            {
+                //destroy player gameobject
+                Destroy(players[i].gameObject);
+            }
 		}
         //empty both lists so we dont reference deleted objects.
 		objectives.Clear();
 		players.Clear();
+    }
+
+    public void setScore(bool player)
+    {
+        if (player == true)
+        {
+            playerScore = addToPlayerScore();
+        }
+        else
+        {
+            enemyScore = addToEnemyScore();
+        }
+
+        if (playerScore > 4)
+        {
+            victoryOrDefeat(true);
+        } else if (enemyScore > 4)
+        {
+            victoryOrDefeat(false);
+        }
+    }
+
+    public int addToPlayerScore()
+    {
+        playerScore ++;
+        Debug.Log("Player Score: " + playerScore);
+        return playerScore; 
+    }
+
+    public int addToEnemyScore()
+    {
+        enemyScore ++;
+        Debug.Log("Enemy Score: " + enemyScore);
+        return enemyScore;
+    }
+
+    public void victoryOrDefeat(bool victory)
+    {
+        isPlaying = false;
+        if (victory == true)
+        {
+            Debug.Log("You've Won");
+            guiHandler.SetGuiMode(2);
+            DestroyAllGameObjects();
+        } else
+        {
+            Debug.Log("You've Lost");
+            guiHandler.SetGuiMode(2);
+            DestroyAllGameObjects();
+        }
     }
 }
