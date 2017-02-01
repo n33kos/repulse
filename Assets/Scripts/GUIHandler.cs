@@ -10,6 +10,12 @@ public class GUIHandler : MonoBehaviour {
 	//A list of canvases which correspond with different gamemodes - set in the editor
 	public List<Canvas> canvases = new List<Canvas>();
 
+	private GameState gameState;
+
+	void Start () {
+		gameState = GameObject.Find("GameState").GetComponent<GameState>();
+	}
+
 	void OnGUI () {
 		switch(mode){
 			case 0:
@@ -35,6 +41,10 @@ public class GUIHandler : MonoBehaviour {
 			//set all canvases disabled except for the one which corresponds with our mode integer
 			canvases[i].enabled = (i == mode);
 		}
+
+		//Reset isplaying variable when we enter gamemode 1 if it is currently set to false
+		if( gameState.isPlaying == false && newMode == 1) 
+			gameState.isPlaying = true;
 	}
 
 	void drawTitleScreen () {
