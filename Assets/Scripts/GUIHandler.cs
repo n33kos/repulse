@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class GUIHandler : MonoBehaviour {
+public class GUIHandler : NetworkBehaviour {
 	
 	//The gamemode as n integer
+	[SyncVar]
 	public int mode = 0;
 
 	//A list of canvases which correspond with different gamemodes - set in the editor

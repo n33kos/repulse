@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 212345933983180166}
   - component: {fileID: 114800382294958106}
   - component: {fileID: 61492191070860628}
+  - component: {fileID: 114214915550173998}
+  - component: {fileID: 114508535761593554}
   m_Layer: 0
   m_Name: trashSprite
   m_TagString: Untagged
@@ -56,6 +58,58 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
+--- !u!114 &114214915550173998
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1879050445607512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 28
+    i1: 64
+    i2: 159
+    i3: 227
+    i4: 34
+    i5: 141
+    i6: 189
+    i7: 84
+    i8: 27
+    i9: 160
+    i10: 167
+    i11: 219
+    i12: 112
+    i13: 201
+    i14: 107
+    i15: 130
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114508535761593554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1879050445607512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.04761905
+  m_SyncRotationAxis: 0
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114800382294958106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,7 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c5af04dbd25c145a6d2e008074c4a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPos: 0
+  gameStateObject: {fileID: 0}
+  gameState: {fileID: 0}
+  targetPosY: 0
 --- !u!212 &212345933983180166
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -100,6 +156,6 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2c9b6e6180d870a49a1d16162e84b89f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.53676474, g: 0.53676474, b: 0.53676474, a: 1}
   m_FlipX: 0
   m_FlipY: 0

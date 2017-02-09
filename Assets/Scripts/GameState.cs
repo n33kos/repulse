@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class GameState : MonoBehaviour {
+public class GameState : NetworkBehaviour {
     public GUIHandler guiHandler;
 
     //Public prefabs to be set in the editor
@@ -21,24 +22,19 @@ public class GameState : MonoBehaviour {
     public bool isPlaying = true;
 
 	void Start () {
-        //SpawnTrash();
+        //CmdSpawnTrash();
         //SpawnPlayer();
         //SpawnEnemyAI();
         guiHandler = GetComponent<GUIHandler>();
     }
-
-    void Update () {		
-	}
-
-	void LateUpdate () {
-	}
 
 	public void ExitGame () {
         //Make a public function available to buttons which closes the application
 		Application.Quit();
 	}
 
-    public void SpawnTrash () {
+    [Command]
+    public void CmdSpawnTrash () {
         // Set first trash spawn position
         float xPosition = -4.25f;
         // Set x position offset
@@ -50,6 +46,8 @@ public class GameState : MonoBehaviour {
             GameObject justMade = Instantiate(trashPrefab, new Vector3(xPosition,0f,0f), Quaternion.identity);
             //Add the just created object to the list of objectives so we can find it later
             objectives.Add(justMade.transform);
+            //send the signal for the server to spawn for all clients
+            NetworkServer.Spawn(justMade);
         }
     }
 

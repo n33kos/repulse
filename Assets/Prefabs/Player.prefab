@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 61393505392236864}
   - component: {fileID: 114581903230009998}
   - component: {fileID: 50649253037588114}
+  - component: {fileID: 114516977588775590}
+  - component: {fileID: 114731955424693108}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -77,6 +79,38 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
+--- !u!114 &114516977588775590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1031221715355818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 144
+    i1: 65
+    i2: 176
+    i3: 228
+    i4: 210
+    i5: 184
+    i6: 185
+    i7: 4
+    i8: 8
+    i9: 98
+    i10: 78
+    i11: 175
+    i12: 231
+    i13: 229
+    i14: 108
+    i15: 171
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114581903230009998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,6 +131,26 @@ MonoBehaviour:
   secondaryFireCooldown: 25
   primaryFireCounter: 5
   secondaryFireCounter: 25
+--- !u!114 &114731955424693108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1031221715355818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.04761905
+  m_SyncRotationAxis: 0
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 1
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!212 &212039987999034784
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -129,6 +183,6 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 99faf01e4f8e16a40be5ce787f2f7536, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0

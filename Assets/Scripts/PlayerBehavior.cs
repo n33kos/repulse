@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerBehavior : MonoBehaviour {
+///Inherit from networkBehavior Instead of Monobehavior
+public class PlayerBehavior : NetworkBehaviour {
 
 	//Declare variables
 	public Rigidbody2D rigidBody;
@@ -16,11 +18,17 @@ public class PlayerBehavior : MonoBehaviour {
 	public int secondaryFireCounter = 25;
 
 	void Start () {
-		//set gloval rigidBody var to instance of this objects rigidbody component
+		//set global rigidBody var to instance of this objects rigidbody component
 		rigidBody = transform.GetComponent<Rigidbody2D>();
 	}
+
+    //Do things to customize the local player avatar
+    public override void OnStartLocalPlayer() {
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
 	
 	void FixedUpdate () {
+
 		//If We Are AI
 		if ( isAI ){
 			//add relative force to our object in a random range
@@ -28,15 +36,15 @@ public class PlayerBehavior : MonoBehaviour {
 			//if a random roll of 1-100 is less than 5 (5% probability)
 			if( Random.Range(0f, 100f) < 5 ){
 				//fire primary weapon
-				PrimaryFire();
+				CmdPrimaryFire();
 			}
 			//if a random roll of 1-100 is less than 0.5 (0.5% probability)
 			if( Random.Range(0f, 100f) < 0.5 ){
 				//fire secondary weapon
-				SecondaryFire();
+				CmdSecondaryFire();
 			}
-		//If We Are Player
-		}else{
+		//If We Are the local Player and not AI
+		}else if(isLocalPlayer && !isAI){
 			//if the canmove variable is set 
 			if ( canMove ){
 				//Add relative force equal to the horizontal and vertical getacis values.
@@ -46,12 +54,12 @@ public class PlayerBehavior : MonoBehaviour {
 			//if fire1 or jump
 			if ( Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump") ){
 				//fire primary weapon
-				PrimaryFire();
+				CmdPrimaryFire();
 			}
 			//if fire2 or fire3
 			if ( Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3") ){
 				//fire secondary weapon
-				SecondaryFire();
+				CmdSecondaryFire();
 			}
 		}
 		//constrain movement of player to window edges
@@ -59,24 +67,30 @@ public class PlayerBehavior : MonoBehaviour {
 		//run any increment counters
 		IncrementCounters();
 	}
-
-	void PrimaryFire () {
+	
+	[Command]
+	void CmdPrimaryFire () {
 		//If the cooldown is up
 		if (primaryFireCounter == primaryFireCooldown) {
 			//Instantiate the bullet with a y offset to prefent collision with player
-			Instantiate(bullet, new Vector3(transform.position.x, transform.position.y+(transform.up.y*(transform.localScale.y/2)), transform.position.z), transform.rotation );
+			GameObject justmade = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y+(transform.up.y*(transform.localScale.y/2)), transform.position.z), transform.rotation );
 			//reset the cooldown counter
 			primaryFireCounter = 0;
+			//Send the command for teh server to spawn the bullet on all clients
+			NetworkServer.Spawn(justmade);
 		}
 	}
-
-	void SecondaryFire () {
+	
+	[Command]
+	void CmdSecondaryFire () {
 		//If the cooldown is up
 		if (secondaryFireCounter == secondaryFireCooldown) {
 			//Instantiate the bomb with a y offset to prefent collision with player
-			Instantiate(bomb, new Vector3(transform.position.x, transform.position.y+(transform.up.y*(transform.localScale.y/2)), transform.position.z), transform.rotation );
+			GameObject justmade = Instantiate(bomb, new Vector3(transform.position.x, transform.position.y+(transform.up.y*(transform.localScale.y/2)), transform.position.z), transform.rotation );
 			//reset the cooldown counter
 			secondaryFireCounter = 0;
+			//Send the command for teh server to spawn the bullet on all clients
+			NetworkServer.Spawn(justmade);
 		}
 	}
 
@@ -104,4 +118,8 @@ public class PlayerBehavior : MonoBehaviour {
 		}
 	}
 
+    void OnConnectedToServer() {
+    	//why isnt this working?
+        Debug.Log("Connected to server");
+    }
 }
