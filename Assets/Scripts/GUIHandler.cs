@@ -35,7 +35,8 @@ public class GUIHandler : NetworkBehaviour {
 		}
 	}
 
-	public void SetGuiMode (int newMode) {
+	[Command]
+	public void CmdSetGuiMode (int newMode) {
 		//set global variable mode equal to newMode
 		mode = newMode;
 		//iterate through canvas objects

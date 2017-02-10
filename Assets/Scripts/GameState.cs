@@ -25,7 +25,6 @@ public class GameState : NetworkBehaviour {
         //CmdSpawnTrash();
         //SpawnPlayer();
         //SpawnEnemyAI();
-        guiHandler = GetComponent<GUIHandler>();
     }
 
 	public void ExitGame () {
@@ -96,6 +95,7 @@ public class GameState : NetworkBehaviour {
                 if (objectives[i].gameObject != null)
                 {
                     //destroy objective gameobject
+                    NetworkServer.UnSpawn(objectives[i].gameObject);
                     Destroy(objectives[i].gameObject);
                 }
     		}
@@ -106,6 +106,7 @@ public class GameState : NetworkBehaviour {
                 if (players[i].gameObject != null)
                 {
                     //destroy player gameobject
+                    NetworkServer.UnSpawn(players[i].gameObject);
                     Destroy(players[i].gameObject);
                 }
     		}
@@ -155,12 +156,12 @@ public class GameState : NetworkBehaviour {
         if (victory == true)
         {
             Debug.Log("You've Won");
-            guiHandler.SetGuiMode(2);
+            guiHandler.CmdSetGuiMode(2);
             DestroyAllGameObjects();
         } else
         {
             Debug.Log("You've Lost");
-            guiHandler.SetGuiMode(2);
+            guiHandler.CmdSetGuiMode(2);
             DestroyAllGameObjects();
         }
     }

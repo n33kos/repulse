@@ -17,6 +17,8 @@ public class PlayerBehavior : NetworkBehaviour {
 	public int primaryFireCounter = 5;
 	public int secondaryFireCounter = 25;
 
+	private int controlDirection = 1;
+
 	void Start () {
 		//set global rigidBody var to instance of this objects rigidbody component
 		rigidBody = transform.GetComponent<Rigidbody2D>();
@@ -25,6 +27,12 @@ public class PlayerBehavior : NetworkBehaviour {
     //Do things to customize the local player avatar
     public override void OnStartLocalPlayer() {
         GetComponent<SpriteRenderer>().color = Color.white;
+        //if we are the first connected player, turn the camera 180 degrees
+		if (NetworkServer.connections.Count == 1){
+			Camera.main.transform.eulerAngles = new Vector3(0f, 0f, 180f);
+			//we also reverse the control direction to a negative number, flipping the controls
+			controlDirection = -1;
+		}
     }
 	
 	void FixedUpdate () {
@@ -49,7 +57,7 @@ public class PlayerBehavior : NetworkBehaviour {
 			if ( canMove ){
 				//Add relative force equal to the horizontal and vertical getacis values.
 				//This works for gamepads and keyboards alike.
-				rigidBody.AddRelativeForce( new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) );
+				rigidBody.AddRelativeForce( new Vector2(Input.GetAxis("Horizontal")*controlDirection, 0) );
 			}
 			//if fire1 or jump
 			if ( Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump") ){
@@ -117,9 +125,4 @@ public class PlayerBehavior : NetworkBehaviour {
 			secondaryFireCounter++;
 		}
 	}
-
-    void OnConnectedToServer() {
-    	//why isnt this working?
-        Debug.Log("Connected to server");
-    }
 }

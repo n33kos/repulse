@@ -127,10 +127,10 @@ MonoBehaviour:
   isAI: 0
   bullet: {fileID: 1635236591646110, guid: c77868d4db38e4346a8404a512560be5, type: 2}
   bomb: {fileID: 1614178933255568, guid: 201adde79c10d934c917849fd0951372, type: 2}
-  primaryFireCooldown: 5
-  secondaryFireCooldown: 25
-  primaryFireCounter: 5
-  secondaryFireCounter: 25
+  primaryFireCooldown: 1
+  secondaryFireCooldown: 5
+  primaryFireCounter: 1
+  secondaryFireCounter: 5
 --- !u!114 &114731955424693108
 MonoBehaviour:
   m_ObjectHideFlags: 1
